@@ -54,7 +54,12 @@ module.exports.validar = function(request, response){
             }        
             
             if (dados.senha == senha){
+
+                //se usuario e senha estiverem ok, cria a sessao e direciona para a home
+                request.session.user = resultado;
+                //request.session.isLogged = true;
                 response.redirect('/');
+
             } else {               
                 response.render('login/login',{erros:validaErros,dados:dados});
                 return;
