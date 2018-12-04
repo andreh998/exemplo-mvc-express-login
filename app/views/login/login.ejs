@@ -1,34 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Login </title>
+    <link rel="stylesheet" href="http://localhost:8000/css/bootstrap.min.css" >
+
+    <title> Login </title>    
 </head>
-<body>
+<body>  
+    
+    <div class="container">
+        
+        <div class="col-sm-5 offset-md-3 text-center">
+            <h1>Efetuar login</h1>
+        </div>
 
-    <h1>Efetue o login</h1>
+        <br>
+        
+        <form class="col-sm-5 offset-md-3" action="/login" method="post">
+            <div class="form-group">
+            <label for="">Usuario</label>
+                <input class="form-control" type="text" name="usuario" placeholder="Usuario" value="<%= dados.usuario%>">    
+            </div>
+            <div class="form-group">
+                <label for="">Senha</label>
+                <input class="form-control" type="password" name="senha" placeholder="******" value="<%= dados.senha%>"> 
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+        </form>
 
-    <br>
-    <form action="/login" method="post">
-        <label for="">Usuario</label>
-        <input type="text" name="usuario" placeholder="Usuario" value="<%= dados.usuario%>">    
+        <br>
 
-        <label for="">Senha</label>
-        <input type="text" name="senha" placeholder="Senha" value="<%= dados.senha%>"> 
-
-        <button type="submit">Login</button>
-    </form>
-
-    <br>
-
-    <% if(erros){ %>
-    <ul>
-        <% for(var chave in erros){ %>
-        <li><%= erros[chave].msg %></li>
+        <% if(erros){ %>
+        <ul>
+            <% for(var chave in erros){ %>
+            <li><%= erros[chave].msg %></li>
+            <% } %>
+        </ul>
         <% } %>
-    </ul>
-    <% } %>
 
+    </div>
 </body>
 </html>

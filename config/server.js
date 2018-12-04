@@ -29,11 +29,16 @@ module.exports = function(){
    app.use(bodyParser.json());
    app.use(bodyParser.urlencoded({extended: true}));   
    app.use(expressValidator());
+   //app.use(cookieParser());
    app.use(session({ 
       secret: "1s2f5h7i89d3s1f7yh8fgh5", 
       resave: false,
-      saveUninitialized:true 
+      saveUninitialized:true,
+      
    }));
+   
+   //defino o local estatico dos arquivos de css
+   app.use(express.static('assets'));
 
    //setamos a view engine para o ejs
    app.set('view engine', 'ejs');
