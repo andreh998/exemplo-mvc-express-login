@@ -7,7 +7,9 @@
 </head>
 <body>
 
-    <h1>Bem vindo</h1>
-
+    <% for (key in sessao){ %>
+        <h1>Bem vindo <%= sessao[key].usuario %></h1>
+    <% } %>
+    
 </body>
 </html>
