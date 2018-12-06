@@ -33,13 +33,15 @@
 
         <br>
 
-        <% if(erros){ %>
-        <ul>
-            <% for(var chave in erros){ %>
-            <li><%= erros[chave].msg %></li>
+        <div class="col-sm-5 offset-md-3">
+            <% if(erros){ %>
+            <ul>
+                <% for(var chave in erros){ %>
+                <li><%= erros[chave].msg %></li>
+                <% } %>
+            </ul>
             <% } %>
-        </ul>
-        <% } %>
+        </div>
 
     </div>
 </body>
