@@ -4,17 +4,18 @@
  * 
 */
 
-//importamos a model
+//importamos o model e executamos a funcao
 var loginModel = require('../models/loginModel')();
-var homeController = require('../controllers/homeController');
 
 //exportamos a funcao responsavel por essa requisicao
 module.exports.index = function(request, response){
     //apenas retorna a tela de login
+    //erros e dados sao das validacoes, caso precise retornar algum erro ou dado para a pagina
     response.render('login/login',{erros:{},dados:{}});
 
 };
 
+//funcao para validar e buscar o registro no banco
 module.exports.validar = function(request, response){
 
     /**
@@ -49,12 +50,12 @@ module.exports.validar = function(request, response){
             response.render('login/login',{erros:validaErros,dados:dados});
             return;
         } else {  
+            //pego a senha do usuario buscado no banco
             for (i in resultado){
                 var senha = resultado[i].senha;
             }        
-            
+            //comparo a senha da request, com a senha do banco
             if (dados.senha == senha){
-
                 //se usuario e senha estiverem ok, cria a sessao e direciona para a home
                 request.session.user = resultado;
                 //request.session.isLogged = true;

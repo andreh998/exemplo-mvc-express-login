@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Login </title>
+    <title> Home </title>
 </head>
 <body>
+
+    <nav>
+        <a href="/cadastroUsuario">Cadastro de usuários</a>
+    </nav>
 
     <% for (key in sessao){ %>
         <h1>Bem vindo <%= sessao[key].usuario %></h1>
