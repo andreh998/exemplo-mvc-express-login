@@ -32,26 +32,38 @@
 
             <div class="form-group col-sm-5">
                 <label for="">Nome Completo</label>
-                <input class="form-control" type="text" placeholder="Nome" name="nome" value="">
+                <input class="form-control" type="text" placeholder="Nome" name="nome" value="<%= dados.nome %>">
             </div>
             <div class="form-group col-sm-5">
                 <label for="">Nome de usuário</label>
-                <input class="form-control" type="text" placeholder="Usuário" name="usuario" value="">
+                <input class="form-control" type="text" placeholder="Usuário" name="usuario" value="<%= dados.usuario %>">
             </div>
             <div class="form-group col-sm-5">
                 <label for="">Senha</label>
-                <input class="form-control" type="password" placeholder="******" name="senha" value="">
+                <input class="form-control" type="password" placeholder="******" name="senha" value="<%= dados.senha %>">
             </div>
             <div class="form-group col-sm-5">
                 <label for="">E-mail</label>
-                <input class="form-control" type="text" placeholder="E-mail" name="email" value="">
+                <input class="form-control" type="text" placeholder="E-mail" name="email" value="<%= dados.email %>">
             </div>
 
             <div class="form-group col-sm-5">
-                <button class="btn btn-primary">Salvar</button>
+                <button class="btn btn-primary" type="submit">Salvar</button>
             </div>
             
         </form>
+
+        <br>
+
+        <div class="col-sm-5">
+            <% if(erros){ %>
+            <ul>
+                <% for(var chave in erros){ %>
+                <li><%= erros[chave].msg %></li>
+                <% } %>
+            </ul>
+            <% } %>
+        </div>
 
     </div>
 </body>

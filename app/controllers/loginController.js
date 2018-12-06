@@ -32,9 +32,9 @@ module.exports.validar = function(request, response){
          * aqui dentro eu valido as informacoes vindas da tela 
          */
         
-        request.assert('usuario', 'Preencha o usuário').notEmpty;
+        request.assert('usuario', 'Preencha o usuário').notEmpty();
         request.assert('usuario', 'Usuario deve ter entre 5 e 20 caracteres').len(5,20);
-        request.assert('senha', 'Preencha a senha').notEmpty;        
+        request.assert('senha', 'Preencha a senha').notEmpty();        
         request.assert('senha', 'Senha deve ter entre 8 e 20 caracteres').len(8,20);
         
         //se exisitr algum erro, armazeno em validaErros        

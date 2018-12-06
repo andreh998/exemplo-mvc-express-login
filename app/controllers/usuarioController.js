@@ -20,32 +20,40 @@
     //salvar a request
     var dados = request.body;
 
+    //verificamos as informacoes dos inputs
+    request.assert('usuario', 'Preecha o campo Usuário').notEmpty();
+    request.assert('nome', 'Preecha o campo Nome').notEmpty();
+    request.assert('senha', 'Preecha o campo Senha').notEmpty();
+    request.assert('email', 'Preecha o campo E-mail').notEmpty();
+    request.assert('usuario', 'Usuário deve ter entre 5 e 20 caracteres').len(5,20);
+    request.assert('nome', 'O Nome deve ter entre 5 e 20 caracteres').len(5,60);
+    request.assert('senha', 'A Senha deve ter entre 5 e 20 caracteres').len(5,20);
+    request.assert('email', 'Preencha um e-mail válido').isEmail();
+
+    //se existir erro, sera armazenado em validaErros
+    var validaErros = request.validationErrors();
+
+    //se validaErros for verdadeiro, significa que existem erros
+    if(validaErros){
+        //se possui erros:
+        //retorno a sessao, os erros, e novamente os dados dos inputs para a tela de cadastro
+        response.render('usuario/cadastroUsuario', {sessao:request.session.user, erros:validaErros, dados:dados});
+        return;
+    }
+   
+    //se nao possuir erros, chama o metodo salvar
     usuarioModel.salvar(dados, function(erro, resultado){
-        
-        //verificamos as informacoes dos inputs
-        request.assert('usuario', 'Preecha o campo Usuário').notEmpty;
-        request.assert('nome', 'Preecha o campo Nome').notEmpty;
-        request.assert('senha', 'Preecha o campo Senha').notEmpty;
-        request.assert('email', 'Preecha o campo E-mail').notEmpty;
-        request.assert('usuario', 'Usuário deve ter entre 5 e 20 caracteres').len(5,20);
-        request.assert('nome', 'O Nome deve ter entre 5 e 20 caracteres').len(5,60);
-        request.assert('senha', 'A Senha deve ter entre 5 e 20 caracteres').len(5,20);
-        request.assert('email', 'Preencha um e-mail válido').isEmail;
-
-        //se existir erro, sera armazenado em validaErros
-        var validaErros = request.validationErrors();
-
-        //se validaErros for verdadeiro, significa que existem erros
-        if(validaErros){
-            //se possui erros:
-            //retorno a sessao, os erros, e novamente os dados dos inputs para a tela de cadastro
-            response.render('usuario/cadastroUsuario', {sessao:request.session.user, erros:validaErros, dados:dados});
-        } else {
-            //senao possuir erros
+        if(!erro){
+            //se não existir nenhum erro ao inserir no banco
             //apenas retorna de volta para a tela de cadastro
+            response.render('usuario/cadastroUsuario', {sessao:request.session.user});            
+        } else {
+            //se der algum erro para inserir, redireciona para a home e mostra no log
+            console.log("Erro ao inserir os dados");
             response.render('usuario/cadastroUsuario', {sessao:request.session.user});
-        }
-
+        };
+        
     });
+    
 
  };
